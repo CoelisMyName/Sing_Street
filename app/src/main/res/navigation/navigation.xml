@@ -49,6 +49,7 @@
 
     <action
         android:id="@+id/_logout"
-        app:destination="@id/login" />
+        app:destination="@id/login"
+        app:launchSingleTop="true" />
 
 </navigation>

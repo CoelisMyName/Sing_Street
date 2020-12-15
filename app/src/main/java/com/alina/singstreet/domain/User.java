@@ -1,9 +1,18 @@
 package com.alina.singstreet.domain;
 
 public class User {
+    String uid;
     String phoneNumber;
     String nickname;
     String password;
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
 
     public String getNickname() {
         return nickname;
