@@ -1,16 +1,16 @@
 plugins {
     id 'com.android.application'
-    id 'androidx.navigation.safeargs'
+    //id 'androidx.navigation.safeargs'
 }
 
 android {
-    compileSdkVersion "android-R"
-    buildToolsVersion "30.0.2"
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "com.alina.singstreet"
         minSdkVersion 28
-        targetSdkVersion "R"
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
