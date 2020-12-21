@@ -1,4 +1,4 @@
-package com.alina.singstreet.domain;
+package com.alina.singstreet.model;
 
 public class Song {
     String title;

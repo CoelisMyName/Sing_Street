@@ -2,6 +2,7 @@ package com.alina.singstreet;
 
 import android.os.Bundle;
 
+import androidx.activity.ComponentActivity;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
