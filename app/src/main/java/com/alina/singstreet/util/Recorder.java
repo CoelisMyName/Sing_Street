@@ -8,8 +8,8 @@ import java.io.IOException;
 public class Recorder {
     MediaRecorder recorder;
 
-    public void start(String path){
-        if (recorder == null){
+    public void start(String path) {
+        if (recorder == null) {
             recorder = new MediaRecorder();
             recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
             recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
@@ -20,16 +20,15 @@ public class Recorder {
                 recorder.start();
             } catch (IOException e) {
                 Log.e("Recorder", "prepare() failed");
-            }
-            finally {
+            } finally {
                 recorder.release();
                 recorder = null;
             }
         }
     }
 
-    public void stop(){
-        if(recorder != null){
+    public void stop() {
+        if (recorder != null) {
             recorder.stop();
             recorder.release();
             recorder = null;

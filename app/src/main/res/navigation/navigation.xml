@@ -26,12 +26,11 @@
         android:id="@+id/home"
         android:name="com.alina.singstreet.view.home.HomeFragment"
         android:label="home fragment"
-        tools:layout="@layout/fragment_home"/>
+        tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/main"
         android:name="com.alina.singstreet.view.main.MainFragment"
-        android:label="main fragment">
-    </fragment>
+        android:label="main fragment"></fragment>
 
 </navigation>

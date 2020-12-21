@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
@@ -50,19 +51,21 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             }
         });
 
-        return binding.getRoot();
-    }
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                requireActivity().finish();
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        savedStateHandle = Navigation.findNavController(view).getPreviousBackStackEntry().getSavedStateHandle();
-        savedStateHandle.set(LOGIN_SUCCESSFUL, false);
+        return binding.getRoot();
     }
 
     @Override
     public void onClick(View view) {
         if (view == binding.signIn) {
-            Navigation.findNavController(binding.getRoot()).navigateUp();
+            shareViewModel.login("", "");
         }
         if (view == binding.signUp) {
             Navigation.findNavController(binding.getRoot()).navigate(R.id._register);
