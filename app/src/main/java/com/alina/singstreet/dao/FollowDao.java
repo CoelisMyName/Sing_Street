@@ -10,7 +10,7 @@ import com.alina.singstreet.domain.Follow;
 public interface FollowDao {
 
     @Insert
-    int insert(Follow... follows);
+    long[] insert(Follow... follows);
 
     @Delete
     int delete(Follow... follows);

@@ -1,10 +1,14 @@
 package com.alina.singstreet.domain;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.UUID;
+
 @Entity
 public class Comment {
+    @NonNull
     @PrimaryKey
     String commentUID;
     String userUID;
@@ -12,6 +16,10 @@ public class Comment {
     String comment;
     String timestamp;
     float rate;
+
+    public Comment() {
+        commentUID = UUID.randomUUID().toString();
+    }
 
     public String getTimestamp() {
         return timestamp;
@@ -21,11 +29,12 @@ public class Comment {
         this.timestamp = timestamp;
     }
 
+    @NonNull
     public String getCommentUID() {
         return commentUID;
     }
 
-    public void setCommentUID(String commentUID) {
+    public void setCommentUID(@NonNull String commentUID) {
         this.commentUID = commentUID;
     }
 

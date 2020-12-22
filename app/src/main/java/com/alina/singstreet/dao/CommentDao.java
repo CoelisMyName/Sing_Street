@@ -9,5 +9,5 @@ import com.alina.singstreet.domain.Comment;
 public interface CommentDao {
 
     @Insert
-    int insert(Comment... comments);
+    long[] insert(Comment... comments);
 }

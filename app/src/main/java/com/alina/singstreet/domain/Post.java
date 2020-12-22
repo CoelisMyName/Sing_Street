@@ -1,10 +1,14 @@
 package com.alina.singstreet.domain;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.UUID;
+
 @Entity
 public class Post {
+    @NonNull
     @PrimaryKey
     String postUID;
 
@@ -16,11 +20,16 @@ public class Post {
     String timestamp;
     String description;
 
+    public Post() {
+        postUID = UUID.randomUUID().toString();
+    }
+
+    @NonNull
     public String getPostUID() {
         return postUID;
     }
 
-    public void setPostUID(String postUID) {
+    public void setPostUID(@NonNull String postUID) {
         this.postUID = postUID;
     }
 

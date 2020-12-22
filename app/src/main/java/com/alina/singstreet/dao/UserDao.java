@@ -9,7 +9,7 @@ import com.alina.singstreet.domain.User;
 public interface UserDao {
 
     @Insert
-    int insert(User... users);
+    long[] insert(User... users);
 
     @Update
     int update(User... users);

@@ -1,13 +1,26 @@
 package com.alina.singstreet.model;
 
+import androidx.room.DatabaseView;
+/*
+@DatabaseView(value = "SELECT Post.song AS song, Post.path AS path, Post.timestamp AS timestamp" +
+        ", Post.description AS description, User.nickname AS nickname, User.icon AS icon" +
+        ", avg(comment.rate) AS rate,Post.userUID AS userUID, Post.postUID AS postUID " +
+        "FROM ((User JOIN Post) join Comment) GROUP BY Comment.postUID")
+ */
+@DatabaseView(value = "SELECT Post.song AS song, Post.path AS path, Post.timestamp AS timestamp, " +
+        "Post.description AS description, User.nickname AS nickname, User.icon AS icon, " +
+        "avg(Comment.rate) AS rate,User.userUID AS userUID, Post.postUID AS postUID " +
+        "FROM Post, User, Comment " +
+        "WHERE Post.userUID = User.userUID AND Comment.postUID = Post.postUID " +
+        "GROUP BY Comment.postUID")
 public class SingCardModel {
-    String postUID;
-    String userUID;
-    int icon;
-    String nickname;
-    String song;
-    String timestamp;
-    String description;
-    String path;
-    float rate;
+    public String postUID;
+    public String userUID;
+    public int icon;
+    public String nickname;
+    public String song;
+    public String timestamp;
+    public String description;
+    public String path;
+    public float rate;
 }

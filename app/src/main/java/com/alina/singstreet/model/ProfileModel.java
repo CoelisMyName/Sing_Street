@@ -1,12 +1,13 @@
 package com.alina.singstreet.model;
 
+import androidx.room.DatabaseView;
+
 import java.util.List;
 
+@DatabaseView(value = "SELECT userUID, icon, phoneNumber, nickname from User")
 public class ProfileModel {
-    String userUID;
-    int icon;
-    String phoneNumber;
-    String nickname;
-
-    List<SingCardModel> list;
+    public String userUID;
+    public int icon;
+    public String phoneNumber;
+    public String nickname;
 }
