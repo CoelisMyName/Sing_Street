@@ -1,5 +1,7 @@
 package com.alina.singstreet;
 
+import android.content.ContentProvider;
+import android.content.ContentResolver;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -11,6 +13,9 @@ import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 
 import com.alina.singstreet.databinding.ActivityContainerBinding;
+
+import java.io.File;
+import java.io.FileDescriptor;
 
 public class ContainerActivity extends AppCompatActivity {
     ActivityContainerBinding binding;

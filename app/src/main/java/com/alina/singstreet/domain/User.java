@@ -1,17 +1,39 @@
 package com.alina.singstreet.domain;
 
+import androidx.room.*;
+
+@Entity(indices = {@Index(value = {"phoneNumber"},unique = true)} )
 public class User {
-    String uid;
+    @PrimaryKey
+    String userUID;
+
+    int icon;
     String phoneNumber;
     String nickname;
     String password;
 
-    public String getUid() {
-        return uid;
+    public String getUserUID() {
+        return userUID;
     }
 
-    public void setUid(String uid) {
-        this.uid = uid;
+    public void setUserUID(String userUID) {
+        this.userUID = userUID;
+    }
+
+    public int getIcon() {
+        return icon;
+    }
+
+    public void setIcon(int icon) {
+        this.icon = icon;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getNickname() {
@@ -28,13 +50,5 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
     }
 }
