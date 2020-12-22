@@ -1,7 +1,19 @@
 package com.alina.singstreet.dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.*;
+
+import com.alina.singstreet.domain.User;
 
 @Dao
 public interface UserDao {
+
+    @Insert
+    int insert(User... users);
+
+    @Update
+    int update(User... users);
+
+    @Query("SELECT * FROM User WHERE phoneNumber LIKE :phoneNumber AND password LIKE :password")
+    User login(String phoneNumber, String password);
 }

@@ -28,5 +28,10 @@ public class ShareViewModel extends AndroidViewModel {
 
     public void logout() {
         login.setValue(false);
+        user = null;
+    }
+
+    public User getUser() {
+        return user;
     }
 }
