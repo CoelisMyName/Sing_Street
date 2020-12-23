@@ -57,5 +57,8 @@ public class DatabaseTest {
         user.setPassword("000000");
         long[] l = userDao.insert(user);
         System.out.println(l[0]);
+        user.setPassword("111111");
+        int m = userDao.update(user);
+        System.out.println(m);
     }
 }
