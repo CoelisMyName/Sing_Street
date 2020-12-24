@@ -15,5 +15,5 @@ public interface UserDao {
     int update(User... users);
 
     @Query("SELECT * FROM User WHERE phoneNumber LIKE :phoneNumber AND password LIKE :password")
-    User login(String phoneNumber, String password);
+    User getUserByPhoneNumberAndPassword(String phoneNumber, String password);
 }

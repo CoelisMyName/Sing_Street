@@ -7,7 +7,7 @@ import androidx.room.DatabaseView;
         ", avg(comment.rate) AS rate,Post.userUID AS userUID, Post.postUID AS postUID " +
         "FROM ((User JOIN Post) join Comment) GROUP BY Comment.postUID")
  */
-@DatabaseView(value = "SELECT Post.song AS song, Post.path AS path, Post.timestamp AS timestamp, " +
+@DatabaseView(value = "SELECT Post.song AS song, Post.title AS title, Post.path AS path, Post.timestamp AS timestamp, " +
         "Post.description AS description, User.nickname AS nickname, User.icon AS icon, " +
         "avg(Comment.rate) AS rate,User.userUID AS userUID, Post.postUID AS postUID " +
         "FROM Post, User, Comment " +
@@ -22,5 +22,6 @@ public class SingCardModel {
     public String timestamp;
     public String description;
     public String path;
+    public String title;
     public float rate;
 }

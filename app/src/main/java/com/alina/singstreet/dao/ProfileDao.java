@@ -22,6 +22,9 @@ public interface ProfileDao {
     @Query("SELECT ProfileModel.userUID AS userUID, icon, phoneNumber, nickname FROM ProfileModel, Follow WHERE Follow.userUID = ProfileModel.userUID AND :userUID LIKE Follow.followerUID")
     LiveData<List<ProfileModel>> getFollowingProfileByUserUID(String userUID);
 
+    @Query("SELECT * FROM ProfileModel WHERE nickname LIKE '%' || :string || '%'")
+    LiveData<List<ProfileModel>> searchProfileByNickname(String string);
+
     @Transaction
     @Query("SELECT userUID, icon, phoneNumber, nickname FROM ProfileModel WHERE :userUID LIKE userUID")
     LiveData<ProfileDetailModel> getProfileDetailByUserUID(String userUID);

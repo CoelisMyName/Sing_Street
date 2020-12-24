@@ -1,34 +1,59 @@
 package com.alina.singstreet;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 
 import com.alina.singstreet.domain.User;
+import com.alina.singstreet.repository.LoginResult;
+import com.alina.singstreet.repository.PostRepository;
+import com.alina.singstreet.repository.UserRepository;
 
 public class ShareViewModel extends AndroidViewModel {
+    static Toast toast;
     User user;
-    MutableLiveData<Boolean> login;
+    LiveData<LoginResult> login;
+    UserRepository userRepository;
+
 
     public ShareViewModel(@NonNull Application application) {
         super(application);
-        login = new MutableLiveData<>(false);
+        userRepository = new UserRepository(application);
+        login = userRepository.getLoginResult();
     }
 
-    public LiveData<Boolean> getLogin() {
+    @SuppressLint("ShowToast")
+    public void showToast(int resID){
+        if(toast == null){
+            toast = Toast.makeText(getApplication(), resID, Toast.LENGTH_SHORT);
+        }
+        else {
+            toast.setText(resID);
+        }
+        toast.show();
+    }
+
+    public LiveData<LoginResult> getLogin() {
         return login;
     }
 
     public void login(String phoneNumber, String password) {
-        login.setValue(true);
+        userRepository.login(phoneNumber,password);
     }
 
     public void logout() {
-        login.setValue(false);
         user = null;
+        userRepository.logout();
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public User getUser() {
