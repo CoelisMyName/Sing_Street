@@ -26,11 +26,79 @@
         android:id="@+id/home"
         android:name="com.alina.singstreet.view.home.HomeFragment"
         android:label="home fragment"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/_profile"
+            app:destination="@id/profile" />
+
+        <action
+            android:id="@+id/_post"
+            app:destination="@id/post"/>
+
+        <action
+            android:id="@+id/_userProfile"
+            app:destination="@id/userProfile"/>
+
+        <action
+            android:id="@+id/_sing"
+            app:destination="@id/sing"/>
+    </fragment>
 
     <fragment
-        android:id="@+id/main"
-        android:name="com.alina.singstreet.view.main.MainFragment"
-        android:label="main fragment"></fragment>
+        android:id="@+id/profile"
+        android:name="com.alina.singstreet.view.profile.ProfileFragment"
+        android:label="profile fragment">
+        <argument
+            android:name="User.userUID"
+            app:argType="String"
+            app:nullable="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/post"
+        android:name="com.alina.singstreet.view.post.PostFragment"
+        android:label="post fragment">
+        <argument
+            android:name="Post.postUID"
+            app:argType="String"
+            app:nullable="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/searchUser"
+        android:name="com.alina.singstreet.view.search.SearchUserFragment"
+        android:label="search User"/>
+
+    <fragment
+        android:id="@+id/searchPost"
+        android:name="com.alina.singstreet.view.search.SearchPostFragment"
+        android:label="search Post"/>
+
+    <fragment
+        android:id="@+id/userProfile"
+        android:name="com.alina.singstreet.view.profile.UserProfileFragment"
+        android:label="User Profile">
+        <argument
+            android:name="User"
+            android:defaultValue="@null"
+            app:nullable="true"
+            app:argType="com.alina.singstreet.domain.User"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/sing"
+        android:name="com.alina.singstreet.view.sing.SingFragment"
+        android:label="sing">
+
+        <action
+            android:id="@+id/_singInfo"
+            app:destination="@id/singInfo"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/singInfo"
+        android:name="com.alina.singstreet.view.sing.SingInfoFragment"
+        android:label="sing information"/>
 
 </navigation>

@@ -10,4 +10,14 @@ public class ProfileModel {
     public int icon;
     public String phoneNumber;
     public String nickname;
+
+    @Override
+    public String toString() {
+        return "ProfileModel{" +
+                "userUID='" + userUID + '\'' +
+                ", icon=" + icon +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", nickname='" + nickname + '\'' +
+                '}';
+    }
 }

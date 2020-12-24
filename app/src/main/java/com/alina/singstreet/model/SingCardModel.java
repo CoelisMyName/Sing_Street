@@ -24,4 +24,20 @@ public class SingCardModel {
     public String path;
     public String title;
     public float rate;
+
+    @Override
+    public String toString() {
+        return "SingCardModel{" +
+                "postUID='" + postUID + '\'' +
+                ", userUID='" + userUID + '\'' +
+                ", icon=" + icon +
+                ", nickname='" + nickname + '\'' +
+                ", song='" + song + '\'' +
+                ", timestamp='" + timestamp + '\'' +
+                ", description='" + description + '\'' +
+                ", path='" + path + '\'' +
+                ", title='" + title + '\'' +
+                ", rate=" + rate +
+                '}';
+    }
 }

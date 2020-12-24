@@ -15,4 +15,12 @@ public class ProfileDetailModel {
     )
 
     public List<SingCardModel> list;
+
+    @Override
+    public String toString() {
+        return "ProfileDetailModel{" +
+                "profileModel=" + profileModel +
+                ", list=" + list +
+                '}';
+    }
 }

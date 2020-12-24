@@ -47,6 +47,10 @@ public class ShareViewModel extends AndroidViewModel {
         userRepository.login(phoneNumber,password);
     }
 
+    public LiveData<Boolean> register(User user){
+        return userRepository.register(user);
+    }
+
     public void logout() {
         user = null;
         userRepository.logout();

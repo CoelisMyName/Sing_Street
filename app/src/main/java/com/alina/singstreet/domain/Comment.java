@@ -69,4 +69,16 @@ public class Comment {
     public void setRate(float rate) {
         this.rate = rate;
     }
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "commentUID='" + commentUID + '\'' +
+                ", userUID='" + userUID + '\'' +
+                ", postUID='" + postUID + '\'' +
+                ", comment='" + comment + '\'' +
+                ", timestamp='" + timestamp + '\'' +
+                ", rate=" + rate +
+                '}';
+    }
 }

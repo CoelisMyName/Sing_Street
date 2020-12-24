@@ -1,4 +1,6 @@
-package com.alina.singstreet;
+package com.alina.singstreet.data;
+
+import com.alina.singstreet.R;
 
 public class DataFactory {
     int[] icons = {R.drawable.icon1,R.drawable.icon2,R.drawable.icon3,R.drawable.icon4,R.drawable.icon5,R.drawable.icon6,R.drawable.icon7};

@@ -21,10 +21,8 @@ import com.alina.singstreet.ShareViewModel;
 import com.alina.singstreet.databinding.FragmentLoginBinding;
 
 public class LoginFragment extends Fragment implements View.OnClickListener {
-    public static String LOGIN_SUCCESSFUL = "LOGIN_SUCCESS";
     FragmentLoginBinding binding;
     ShareViewModel shareViewModel;
-    SavedStateHandle savedStateHandle;
 
     @Nullable
     @Override
@@ -65,17 +63,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if (view == binding.signIn) {
-            shareViewModel.login("", "");
+            shareViewModel.login(binding.phoneNumber.getText().toString(), binding.password.getText().toString());
         }
         if (view == binding.signUp) {
             Navigation.findNavController(binding.getRoot()).navigate(R.id._register);
         }
-    }
-
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putString("phoneNumber", binding.phoneNumber.getEditableText().toString());
-        outState.putString("password", binding.password.getEditableText().toString());
     }
 }

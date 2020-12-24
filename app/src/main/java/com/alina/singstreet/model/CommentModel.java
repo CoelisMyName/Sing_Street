@@ -16,4 +16,18 @@ public class CommentModel {
     public float rate;
     public String nickname;
     public int icon;
+
+    @Override
+    public String toString() {
+        return "CommentModel{" +
+                "commentUID='" + commentUID + '\'' +
+                ", userUID='" + userUID + '\'' +
+                ", postUID='" + postUID + '\'' +
+                ", comment='" + comment + '\'' +
+                ", timestamp='" + timestamp + '\'' +
+                ", rate=" + rate +
+                ", nickname='" + nickname + '\'' +
+                ", icon=" + icon +
+                '}';
+    }
 }

@@ -80,4 +80,17 @@ public class Post {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "postUID='" + postUID + '\'' +
+                ", userUID='" + userUID + '\'' +
+                ", title='" + title + '\'' +
+                ", song='" + song + '\'' +
+                ", path='" + path + '\'' +
+                ", timestamp='" + timestamp + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }

@@ -37,4 +37,12 @@ public class Follow {
     public String getUserUID() {
         return userUID;
     }
+
+    @Override
+    public String toString() {
+        return "Follow{" +
+                "userUID='" + userUID + '\'' +
+                ", followerUID='" + followerUID + '\'' +
+                '}';
+    }
 }
