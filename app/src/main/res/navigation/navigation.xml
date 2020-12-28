@@ -13,7 +13,7 @@
 
         <action
             android:id="@+id/_register"
-            app:destination="@id/register" />
+            app:destination="@id/register"/>
     </fragment>
 
     <fragment
@@ -30,15 +30,21 @@
 
         <action
             android:id="@+id/_profile"
-            app:destination="@id/profile" />
+            app:destination="@id/profile">
+            <argument
+                android:name="User.userUID"
+                app:argType="string"
+                app:nullable="false" />
+        </action>
 
         <action
             android:id="@+id/_post"
-            app:destination="@id/post"/>
-
-        <action
-            android:id="@+id/_userProfile"
-            app:destination="@id/userProfile"/>
+            app:destination="@id/post">
+            <argument
+                android:name="Post.postUID"
+                app:argType="string"
+                app:nullable="false"/>
+        </action>
 
         <action
             android:id="@+id/_sing"
@@ -48,21 +54,67 @@
     <fragment
         android:id="@+id/profile"
         android:name="com.alina.singstreet.view.profile.ProfileFragment"
+        tools:layout="@layout/fragment_profile"
         android:label="profile fragment">
         <argument
             android:name="User.userUID"
-            app:argType="String"
-            app:nullable="true" />
+            app:argType="string"
+            app:nullable="false" />
+
+        <action
+            android:id="@id/_profile"
+            app:destination="@id/profile">
+            <argument
+                android:name="User.userUID"
+                app:argType="string"
+                app:nullable="false" />
+        </action>
+
+        <action
+            android:id="@id/_post"
+            app:destination="@id/post">
+            <argument
+                android:name="Post.postUID"
+                app:argType="string"
+                app:nullable="false"/>
+        </action>
+
+        <action
+            android:id="@+id/_follow"
+            app:destination="@id/follow">
+            <argument
+                android:name="title"
+                app:argType="string"
+                app:nullable="false"/>
+            <argument
+                android:name="User.userUID"
+                app:argType="string"
+                app:nullable="false"/>
+            <argument
+                android:name="follow"
+                app:argType="integer"
+                app:nullable="false"/>
+        </action>
     </fragment>
 
     <fragment
         android:id="@+id/post"
         android:name="com.alina.singstreet.view.post.PostFragment"
+        tools:layout="@layout/fragment_post"
         android:label="post fragment">
         <argument
             android:name="Post.postUID"
-            app:argType="String"
-            app:nullable="true" />
+            app:argType="string"
+            app:nullable="false" />
+
+        <action
+            android:id="@+id/_profile"
+            app:destination="@id/profile">
+            <argument
+                android:name="User.userUID"
+                app:argType="string"
+                app:nullable="false" />
+        </action>
     </fragment>
 
     <fragment
@@ -76,29 +128,37 @@
         android:label="search Post"/>
 
     <fragment
-        android:id="@+id/userProfile"
-        android:name="com.alina.singstreet.view.profile.UserProfileFragment"
-        android:label="User Profile">
-        <argument
-            android:name="User"
-            android:defaultValue="@null"
-            app:nullable="true"
-            app:argType="com.alina.singstreet.domain.User"/>
-    </fragment>
+        android:id="@+id/sing"
+        tools:layout="@layout/fragment_sing"
+        android:name="com.alina.singstreet.view.sing.SingFragment"
+        android:label="sing"/>
 
     <fragment
-        android:id="@+id/sing"
-        android:name="com.alina.singstreet.view.sing.SingFragment"
-        android:label="sing">
+        android:id="@+id/follow"
+        tools:layout="@layout/fragment_follow"
+        android:name="com.alina.singstreet.view.profile.FollowFragment"
+        android:label="follow">
+        <argument
+            android:name="title"
+            app:argType="string"
+            app:nullable="false"/>
+        <argument
+            android:name="User.userUID"
+            app:argType="string"
+            app:nullable="false"/>
+        <argument
+            android:name="follow"
+            app:argType="integer"
+            app:nullable="false"/>
 
         <action
-            android:id="@+id/_singInfo"
-            app:destination="@id/singInfo"/>
+            android:id="@+id/_profile"
+            app:destination="@id/profile">
+            <argument
+                android:name="User.userUID"
+                app:argType="string"
+                app:nullable="false"/>
+        </action>
     </fragment>
-
-    <fragment
-        android:id="@+id/singInfo"
-        android:name="com.alina.singstreet.view.sing.SingInfoFragment"
-        android:label="sing information"/>
 
 </navigation>

@@ -29,4 +29,7 @@ public interface PostDao {
             "OR (SingCardModel.userUID LIKE :userUID AND (song LIKE '%' || :string || '%' OR description LIKE '%' || :string || '%' OR title LIKE '%' || :string || '%'))"
     )
     LiveData<List<SingCardModel>> searchSingCard(String userUID, String string);
+
+    @Query("SELECT * FROM SingCardModel WHERE :postUID LIKE postUID")
+    LiveData<SingCardModel> getSingCardByPostUID(String postUID);
 }

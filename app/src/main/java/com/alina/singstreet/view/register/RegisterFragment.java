@@ -116,7 +116,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (!editable.toString().equals(binding.password.toString())) {
+                if (!editable.toString().equals(binding.password.getText().toString())) {
                     binding.repeatPassword.setError("密码与最初输入不相符");
                     textState.match = false;
                 }
@@ -136,7 +136,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
             Navigation.findNavController(binding.getRoot()).navigateUp();
         }
         if (view == binding.signUp){
-            if(!textState.phoneNumber && !textState.password && !textState.nickname && !textState.match){
+            if(textState.phoneNumber && textState.password && textState.nickname && textState.match){
                 User user = new User();
                 user.setPassword(binding.password.getText().toString());
                 user.setNickname(binding.nickname.getText().toString());
@@ -155,7 +155,9 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                     }
                 });
             }
-            shareViewModel.showToast(R.string.register_warning);
+            else {
+                shareViewModel.showToast(R.string.register_warning);
+            }
         }
     }
 

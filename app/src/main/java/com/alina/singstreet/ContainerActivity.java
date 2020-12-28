@@ -28,7 +28,6 @@ public class ContainerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_container);
         shareViewModel = new ViewModelProvider(this).get(ShareViewModel.class);
-
         shareViewModel.getLogin().observe(this, new Observer<LoginResult>() {
             @Override
             public void onChanged(LoginResult loginResult) {

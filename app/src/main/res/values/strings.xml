@@ -14,4 +14,6 @@
     <string name="register_warning">请准确填写好注册信息</string>
     <string name="register_fail">注册失败</string>
     <string name="register_success">注册成功</string>
+    <string name="number_of_follower">%d 关注者</string>
+    <string name="number_of_following">%d 正在关注</string>
 </resources>

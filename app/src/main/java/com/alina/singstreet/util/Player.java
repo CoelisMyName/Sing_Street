@@ -24,6 +24,20 @@ public class Player {
         }
     }
 
+    public int getCurrentPosition(){
+        if(player != null) {
+            return player.getCurrentPosition();
+        }
+        return 0;
+    }
+
+    public int getDuration(){
+        if(player != null) {
+            return player.getDuration();
+        }
+        return 0;
+    }
+
     public void stop() {
         if (player != null) {
             player.release();

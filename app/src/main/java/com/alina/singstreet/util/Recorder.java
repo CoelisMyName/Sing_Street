@@ -8,7 +8,7 @@ import java.io.IOException;
 public class Recorder {
     MediaRecorder recorder;
 
-    public void start(String path) {
+    public void start(String path) throws IOException {
         if (recorder == null) {
             recorder = new MediaRecorder();
             recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
@@ -20,9 +20,9 @@ public class Recorder {
                 recorder.start();
             } catch (IOException e) {
                 Log.e("Recorder", "prepare() failed");
-            } finally {
                 recorder.release();
                 recorder = null;
+                throw e;
             }
         }
     }

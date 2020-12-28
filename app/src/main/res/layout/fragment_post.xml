@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -32,6 +33,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
                 android:clickable="true"
                 android:src="@drawable/icon1"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -141,9 +143,13 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            tools:listitem="@layout/commentcard"
             android:layout_weight="1"/>
+
+
 
     </LinearLayout>
 </layout>

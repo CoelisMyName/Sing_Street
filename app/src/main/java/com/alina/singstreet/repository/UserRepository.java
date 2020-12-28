@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.alina.singstreet.R;
+import com.alina.singstreet.Service;
 import com.alina.singstreet.dao.FollowDao;
 import com.alina.singstreet.dao.ProfileDao;
 import com.alina.singstreet.dao.UserDao;
@@ -20,7 +21,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class UserRepository {
-    ExecutorService service = Executors.newCachedThreadPool();
+    ExecutorService service;
     MutableLiveData<LoginResult> loginResult = new MutableLiveData<>(new LoginResult());
     UserDao userDao;
     ProfileDao profileDao;
@@ -31,6 +32,7 @@ public class UserRepository {
     }
 
     public UserRepository(Application application){
+        service = Service.getInstance().getExecutorService();
         Database database = Database.getInstance(application);
         userDao = database.getUserDao();
         profileDao = database.getProfileDao();
@@ -47,6 +49,10 @@ public class UserRepository {
             }
         });
         return b;
+    }
+
+    public LiveData<Integer> isFollowed(String userUID, String targetUID){
+        return followDao.isFollowed(userUID, targetUID);
     }
 
     public LiveData<Boolean> update(User user){

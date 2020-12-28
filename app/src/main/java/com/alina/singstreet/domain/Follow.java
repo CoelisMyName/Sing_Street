@@ -2,6 +2,7 @@ package com.alina.singstreet.domain;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 
 @Entity(primaryKeys = {"userUID","followerUID"})
 public class Follow {
@@ -15,6 +16,7 @@ public class Follow {
         followerUID = "";
     }
 
+    @Ignore
     public Follow(@NonNull String userUID, @NonNull String followerUID){
         this.userUID = userUID;
         this.followerUID = followerUID;

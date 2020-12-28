@@ -8,6 +8,8 @@ import androidx.room.Query;
 import com.alina.singstreet.domain.Comment;
 import com.alina.singstreet.model.CommentModel;
 
+import java.util.List;
+
 @Dao
 public interface CommentDao {
 
@@ -15,5 +17,5 @@ public interface CommentDao {
     long[] insert(Comment... comments);
 
     @Query("SELECT * FROM CommentModel WHERE postUID LIKE :postUID")
-    LiveData<CommentModel> getCommentByPostUID(String postUID);
+    LiveData<List<CommentModel>> getCommentByPostUID(String postUID);
 }

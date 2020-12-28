@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.alina.singstreet.Service;
 import com.alina.singstreet.dao.CommentDao;
 import com.alina.singstreet.dao.PostDao;
 import com.alina.singstreet.data.Database;
@@ -19,11 +20,12 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class PostRepository {
-    ExecutorService service = Executors.newCachedThreadPool();
+    ExecutorService service;
     PostDao postDao;
     CommentDao commentDao;
 
     public PostRepository(Application application){
+        service = Service.getInstance().getExecutorService();
         Database database = Database.getInstance(application);
         postDao = database.getPostDao();
         commentDao = database.getCommentDao();
@@ -37,7 +39,7 @@ public class PostRepository {
         return postDao.searchSingCard(userUID, string);
     }
 
-    public LiveData<CommentModel> getCommentByPostUID(String postUID){
+    public LiveData<List<CommentModel>> getCommentByPostUID(String postUID){
         return commentDao.getCommentByPostUID(postUID);
     }
 
@@ -63,5 +65,9 @@ public class PostRepository {
             }
         });
         return b;
+    }
+
+    public LiveData<SingCardModel> getSingCardByPostUID(String postUID){
+        return postDao.getSingCardByPostUID(postUID);
     }
 }

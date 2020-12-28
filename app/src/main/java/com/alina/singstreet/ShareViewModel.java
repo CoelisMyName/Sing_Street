@@ -11,6 +11,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
 import com.alina.singstreet.domain.User;
+import com.alina.singstreet.model.ProfileModel;
 import com.alina.singstreet.repository.LoginResult;
 import com.alina.singstreet.repository.PostRepository;
 import com.alina.singstreet.repository.UserRepository;
@@ -39,6 +40,17 @@ public class ShareViewModel extends AndroidViewModel {
         toast.show();
     }
 
+    @SuppressLint("ShowToast")
+    public void showToast(String s){
+        if(toast == null){
+            toast = Toast.makeText(getApplication(), s, Toast.LENGTH_SHORT);
+        }
+        else {
+            toast.setText(s);
+        }
+        toast.show();
+    }
+
     public LiveData<LoginResult> getLogin() {
         return login;
     }
@@ -62,5 +74,9 @@ public class ShareViewModel extends AndroidViewModel {
 
     public User getUser() {
         return user;
+    }
+
+    public LiveData<ProfileModel> getProfileByUserUID(String userUID){
+        return userRepository.getProfileByUserUID(userUID);
     }
 }

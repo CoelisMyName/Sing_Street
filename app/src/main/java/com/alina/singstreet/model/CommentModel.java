@@ -1,5 +1,6 @@
 package com.alina.singstreet.model;
 
+import androidx.annotation.Nullable;
 import androidx.room.DatabaseView;
 
 @DatabaseView(value = "SELECT Comment.commentUID AS commentUID, User.userUID AS userUID, Post.postUID AS postUID, " +
@@ -16,6 +17,17 @@ public class CommentModel {
     public float rate;
     public String nickname;
     public int icon;
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        if (obj instanceof CommentModel){
+            CommentModel temp = (CommentModel)obj;
+            return commentUID.equals(temp.commentUID) && userUID.equals(temp.userUID) && postUID.equals(temp.postUID)
+                    && comment.equals(temp.comment) && timestamp.equals(temp.timestamp) && rate == temp.rate && nickname.equals(temp.nickname)
+                    && icon == temp.icon;
+        }
+        return super.equals(obj);
+    }
 
     @Override
     public String toString() {
