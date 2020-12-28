@@ -17,33 +17,32 @@ import com.alina.singstreet.model.SingCardModel;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class PostRepository {
     ExecutorService service;
     PostDao postDao;
     CommentDao commentDao;
 
-    public PostRepository(Application application){
+    public PostRepository(Application application) {
         service = Service.getInstance().getExecutorService();
         Database database = Database.getInstance(application);
         postDao = database.getPostDao();
         commentDao = database.getCommentDao();
     }
 
-    public LiveData<List<SingCardModel>> getSingCardByUserUID(@NonNull String userUID){
+    public LiveData<List<SingCardModel>> getSingCardByUserUID(@NonNull String userUID) {
         return postDao.getSingCardByUserUID(userUID);
     }
 
-    public LiveData<List<SingCardModel>> searchSingCard(String userUID, String string){
+    public LiveData<List<SingCardModel>> searchSingCard(String userUID, String string) {
         return postDao.searchSingCard(userUID, string);
     }
 
-    public LiveData<List<CommentModel>> getCommentByPostUID(String postUID){
+    public LiveData<List<CommentModel>> getCommentByPostUID(String postUID) {
         return commentDao.getCommentByPostUID(postUID);
     }
 
-    public LiveData<Boolean> post(Post post){
+    public LiveData<Boolean> post(Post post) {
         MutableLiveData<Boolean> b = new MutableLiveData<>();
         service.execute(new Runnable() {
             @Override
@@ -55,7 +54,7 @@ public class PostRepository {
         return b;
     }
 
-    public LiveData<Boolean> comment(Comment comment){
+    public LiveData<Boolean> comment(Comment comment) {
         MutableLiveData<Boolean> b = new MutableLiveData<>();
         service.execute(new Runnable() {
             @Override
@@ -67,7 +66,7 @@ public class PostRepository {
         return b;
     }
 
-    public LiveData<SingCardModel> getSingCardByPostUID(String postUID){
+    public LiveData<SingCardModel> getSingCardByPostUID(String postUID) {
         return postDao.getSingCardByPostUID(postUID);
     }
 }

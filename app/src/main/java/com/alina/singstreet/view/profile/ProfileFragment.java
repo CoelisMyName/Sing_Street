@@ -27,10 +27,11 @@ public class ProfileFragment extends Fragment {
     ShareViewModel shareViewModel;
     ProfileViewModel profileViewModel;
     FragmentProfileBinding binding;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile,container,false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false);
         SingCardAdapter adapter = new SingCardAdapter();
         adapter.setListener(new SingCardAdapter.SingCardListener() {
             @Override
@@ -48,7 +49,14 @@ public class ProfileFragment extends Fragment {
         binding.recycler.setLayoutManager(layoutManager);
         binding.recycler.setHasFixedSize(true);
 
-        assert getArguments() != null;
+        binding.toolbar.setNavigationIcon(R.drawable.ic_round_clear_24);
+        binding.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(binding.getRoot()).navigateUp();
+            }
+        });
+
         shareViewModel = new ViewModelProvider(requireActivity()).get(ShareViewModel.class);
         profileViewModel = new ViewModelProvider(requireActivity()).get(ProfileViewModel.class);
         String userUID = ProfileFragmentArgs.fromBundle(getArguments()).getUserUserUID();
@@ -66,28 +74,25 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        if (userUID.equals(shareViewModel.getUser().getUserUID())){
+        if (userUID.equals(shareViewModel.getUser().getUserUID())) {
             binding.button.setText("修改个人资料");
             //TODO setting fragment
-        }
-        else {
+        } else {
             profileViewModel.isFollowed(shareViewModel.getUser().getUserUID(), userUID).observe(getViewLifecycleOwner(), new Observer<Integer>() {
                 @Override
                 public void onChanged(Integer integer) {
-                    if(integer > 0){
+                    if (integer > 0) {
                         binding.button.setText("取消关注");
-                    }
-                    else {
+                    } else {
                         binding.button.setText("关注");
                     }
                     binding.button.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             Follow follow = new Follow(userUID, shareViewModel.getUser().getUserUID());
-                            if(integer > 0){
+                            if (integer > 0) {
                                 profileViewModel.unfollow(follow);
-                            }
-                            else {
+                            } else {
                                 profileViewModel.follow(follow);
                             }
                         }

@@ -17,16 +17,16 @@ public interface PostDao {
 
     @Query(
             "SELECT postUID, SingCardModel.userUID AS userUID, icon, nickname, song, timestamp, description, path, rate, title " +
-            "FROM SingCardModel, Follow " +
-            "WHERE (:userUID LIKE Follow.followerUID AND Follow.userUID = SingCardModel.userUID) OR SingCardModel.userUID LIKE :userUID"
+                    "FROM SingCardModel, Follow " +
+                    "WHERE (:userUID LIKE Follow.followerUID AND Follow.userUID = SingCardModel.userUID) OR SingCardModel.userUID LIKE :userUID"
     )
     LiveData<List<SingCardModel>> getSingCardByUserUID(String userUID);
 
     @Query(
             "SELECT postUID, SingCardModel.userUID AS userUID, icon, nickname, song, timestamp, description, path, rate, title " +
-            "FROM SingCardModel, Follow " +
-            "WHERE (:userUID LIKE Follow.followerUID AND Follow.userUID = SingCardModel.userUID AND (song LIKE '%' || :string || '%' OR description LIKE '%' || :string || '%' OR title LIKE '%' || :string || '%'))" +
-            "OR (SingCardModel.userUID LIKE :userUID AND (song LIKE '%' || :string || '%' OR description LIKE '%' || :string || '%' OR title LIKE '%' || :string || '%'))"
+                    "FROM SingCardModel, Follow " +
+                    "WHERE (:userUID LIKE Follow.followerUID AND Follow.userUID = SingCardModel.userUID AND (song LIKE '%' || :string || '%' OR description LIKE '%' || :string || '%' OR title LIKE '%' || :string || '%'))" +
+                    "OR (SingCardModel.userUID LIKE :userUID AND (song LIKE '%' || :string || '%' OR description LIKE '%' || :string || '%' OR title LIKE '%' || :string || '%'))"
     )
     LiveData<List<SingCardModel>> searchSingCard(String userUID, String string);
 

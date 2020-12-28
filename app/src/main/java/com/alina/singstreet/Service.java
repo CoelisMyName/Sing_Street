@@ -4,13 +4,14 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Service {
-    ExecutorService executorService = Executors.newFixedThreadPool(5);
     static Service service;
+    ExecutorService executorService = Executors.newFixedThreadPool(5);
 
-    private Service(){}
+    private Service() {
+    }
 
     public static Service getInstance() {
-        if(service == null){
+        if (service == null) {
             service = new Service();
         }
         return service;

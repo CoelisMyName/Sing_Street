@@ -29,18 +29,12 @@ import com.alina.singstreet.model.SingCardModel;
 public abstract class Database extends RoomDatabase {
     static Database dataBase;
 
-    static RoomDatabase.Callback callback = new RoomDatabase.Callback(){
+    static RoomDatabase.Callback callback = new RoomDatabase.Callback() {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
         }
     };
-
-    public abstract UserDao getUserDao();
-    public abstract PostDao getPostDao();
-    public abstract FollowDao getFollowDao();
-    public abstract CommentDao getCommentDao();
-    public abstract ProfileDao getProfileDao();
 
     public static synchronized Database getInstance(Context context) {
         if (dataBase == null) {
@@ -51,4 +45,14 @@ public abstract class Database extends RoomDatabase {
         }
         return dataBase;
     }
+
+    public abstract UserDao getUserDao();
+
+    public abstract PostDao getPostDao();
+
+    public abstract FollowDao getFollowDao();
+
+    public abstract CommentDao getCommentDao();
+
+    public abstract ProfileDao getProfileDao();
 }

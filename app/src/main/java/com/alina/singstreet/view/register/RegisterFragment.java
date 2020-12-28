@@ -49,8 +49,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                 if (editable.length() < 11) {
                     binding.phoneNumber.setError("请输入正确的电话号码");
                     textState.phoneNumber = false;
-                }
-                else {
+                } else {
                     textState.phoneNumber = true;
                 }
             }
@@ -72,8 +71,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                 if (editable.length() > 30) {
                     binding.nickname.setError("昵称字符数最大不能超过30");
                     textState.nickname = false;
-                }
-                else {
+                } else {
                     textState.nickname = true;
                 }
             }
@@ -96,8 +94,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                 if (editable.length() < 6) {
                     binding.password.setError("密码最小需要6个字符");
                     textState.password = false;
-                }
-                else {
+                } else {
                     textState.password = true;
                 }
             }
@@ -119,8 +116,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                 if (!editable.toString().equals(binding.password.getText().toString())) {
                     binding.repeatPassword.setError("密码与最初输入不相符");
                     textState.match = false;
-                }
-                else {
+                } else {
                     textState.match = true;
                 }
             }
@@ -135,8 +131,8 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
         if (view == binding.cancel) {
             Navigation.findNavController(binding.getRoot()).navigateUp();
         }
-        if (view == binding.signUp){
-            if(textState.phoneNumber && textState.password && textState.nickname && textState.match){
+        if (view == binding.signUp) {
+            if (textState.phoneNumber && textState.password && textState.nickname && textState.match) {
                 User user = new User();
                 user.setPassword(binding.password.getText().toString());
                 user.setNickname(binding.nickname.getText().toString());
@@ -145,17 +141,15 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                 shareViewModel.register(user).observe(this, new Observer<Boolean>() {
                     @Override
                     public void onChanged(Boolean aBoolean) {
-                        if(true){
-                            shareViewModel.login(user.getPhoneNumber(),user.getPassword());
+                        if (true) {
+                            shareViewModel.login(user.getPhoneNumber(), user.getPassword());
                             shareViewModel.showToast(R.string.register_success);
-                        }
-                        else {
+                        } else {
                             shareViewModel.showToast(R.string.register_fail);
                         }
                     }
                 });
-            }
-            else {
+            } else {
                 shareViewModel.showToast(R.string.register_warning);
             }
         }

@@ -20,8 +20,8 @@ public class CommentModel {
 
     @Override
     public boolean equals(@Nullable Object obj) {
-        if (obj instanceof CommentModel){
-            CommentModel temp = (CommentModel)obj;
+        if (obj instanceof CommentModel) {
+            CommentModel temp = (CommentModel) obj;
             return commentUID.equals(temp.commentUID) && userUID.equals(temp.userUID) && postUID.equals(temp.postUID)
                     && comment.equals(temp.comment) && timestamp.equals(temp.timestamp) && rate == temp.rate && nickname.equals(temp.nickname)
                     && icon == temp.icon;

@@ -13,7 +13,7 @@
 
         <action
             android:id="@+id/_register"
-            app:destination="@id/register"/>
+            app:destination="@id/register" />
     </fragment>
 
     <fragment
@@ -43,19 +43,19 @@
             <argument
                 android:name="Post.postUID"
                 app:argType="string"
-                app:nullable="false"/>
+                app:nullable="false" />
         </action>
 
         <action
             android:id="@+id/_sing"
-            app:destination="@id/sing"/>
+            app:destination="@id/sing" />
     </fragment>
 
     <fragment
         android:id="@+id/profile"
         android:name="com.alina.singstreet.view.profile.ProfileFragment"
-        tools:layout="@layout/fragment_profile"
-        android:label="profile fragment">
+        android:label="profile fragment"
+        tools:layout="@layout/fragment_profile">
         <argument
             android:name="User.userUID"
             app:argType="string"
@@ -76,7 +76,7 @@
             <argument
                 android:name="Post.postUID"
                 app:argType="string"
-                app:nullable="false"/>
+                app:nullable="false" />
         </action>
 
         <action
@@ -85,23 +85,23 @@
             <argument
                 android:name="title"
                 app:argType="string"
-                app:nullable="false"/>
+                app:nullable="false" />
             <argument
                 android:name="User.userUID"
                 app:argType="string"
-                app:nullable="false"/>
+                app:nullable="false" />
             <argument
                 android:name="follow"
                 app:argType="integer"
-                app:nullable="false"/>
+                app:nullable="false" />
         </action>
     </fragment>
 
     <fragment
         android:id="@+id/post"
         android:name="com.alina.singstreet.view.post.PostFragment"
-        tools:layout="@layout/fragment_post"
-        android:label="post fragment">
+        android:label="post fragment"
+        tools:layout="@layout/fragment_post">
         <argument
             android:name="Post.postUID"
             app:argType="string"
@@ -120,36 +120,36 @@
     <fragment
         android:id="@+id/searchUser"
         android:name="com.alina.singstreet.view.search.SearchUserFragment"
-        android:label="search User"/>
+        android:label="search User" />
 
     <fragment
         android:id="@+id/searchPost"
         android:name="com.alina.singstreet.view.search.SearchPostFragment"
-        android:label="search Post"/>
+        android:label="search Post" />
 
     <fragment
         android:id="@+id/sing"
-        tools:layout="@layout/fragment_sing"
         android:name="com.alina.singstreet.view.sing.SingFragment"
-        android:label="sing"/>
+        android:label="sing"
+        tools:layout="@layout/fragment_sing" />
 
     <fragment
         android:id="@+id/follow"
-        tools:layout="@layout/fragment_follow"
         android:name="com.alina.singstreet.view.profile.FollowFragment"
-        android:label="follow">
+        android:label="follow"
+        tools:layout="@layout/fragment_follow">
         <argument
             android:name="title"
             app:argType="string"
-            app:nullable="false"/>
+            app:nullable="false" />
         <argument
             android:name="User.userUID"
             app:argType="string"
-            app:nullable="false"/>
+            app:nullable="false" />
         <argument
             android:name="follow"
             app:argType="integer"
-            app:nullable="false"/>
+            app:nullable="false" />
 
         <action
             android:id="@+id/_profile"
@@ -157,7 +157,7 @@
             <argument
                 android:name="User.userUID"
                 app:argType="string"
-                app:nullable="false"/>
+                app:nullable="false" />
         </action>
     </fragment>
 

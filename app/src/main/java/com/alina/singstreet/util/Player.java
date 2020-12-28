@@ -24,15 +24,15 @@ public class Player {
         }
     }
 
-    public int getCurrentPosition(){
-        if(player != null) {
+    public int getCurrentPosition() {
+        if (player != null) {
             return player.getCurrentPosition();
         }
         return 0;
     }
 
-    public int getDuration(){
-        if(player != null) {
+    public int getDuration() {
+        if (player != null) {
             return player.getDuration();
         }
         return 0;

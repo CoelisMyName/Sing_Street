@@ -18,7 +18,6 @@ import com.alina.singstreet.model.ProfileModel;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class UserRepository {
     ExecutorService service;
@@ -27,11 +26,7 @@ public class UserRepository {
     ProfileDao profileDao;
     FollowDao followDao;
 
-    public LiveData<LoginResult> getLoginResult() {
-        return loginResult;
-    }
-
-    public UserRepository(Application application){
+    public UserRepository(Application application) {
         service = Service.getInstance().getExecutorService();
         Database database = Database.getInstance(application);
         userDao = database.getUserDao();
@@ -39,7 +34,11 @@ public class UserRepository {
         followDao = database.getFollowDao();
     }
 
-    public LiveData<Boolean> register(User user){
+    public LiveData<LoginResult> getLoginResult() {
+        return loginResult;
+    }
+
+    public LiveData<Boolean> register(User user) {
         MutableLiveData<Boolean> b = new MutableLiveData<>();
         service.execute(new Runnable() {
             @Override
@@ -51,11 +50,11 @@ public class UserRepository {
         return b;
     }
 
-    public LiveData<Integer> isFollowed(String userUID, String targetUID){
+    public LiveData<Integer> isFollowed(String userUID, String targetUID) {
         return followDao.isFollowed(userUID, targetUID);
     }
 
-    public LiveData<Boolean> update(User user){
+    public LiveData<Boolean> update(User user) {
         MutableLiveData<Boolean> b = new MutableLiveData<>();
         service.execute(new Runnable() {
             @Override
@@ -67,16 +66,15 @@ public class UserRepository {
         return b;
     }
 
-    public void login(String phoneNumber, String password){
+    public void login(String phoneNumber, String password) {
         service.execute(new Runnable() {
             @Override
             public void run() {
-                User user = userDao.getUserByPhoneNumberAndPassword(phoneNumber,password);
-                if(user != null ){
+                User user = userDao.getUserByPhoneNumberAndPassword(phoneNumber, password);
+                if (user != null) {
                     LoginResult.Success<User> success = new LoginResult.Success<>(user);
                     loginResult.postValue(new LoginResult(success));
-                }
-                else {
+                } else {
                     LoginResult.Error<Integer> error = new LoginResult.Error<>(R.string.login_fail);
                     loginResult.postValue(new LoginResult(error));
                 }
@@ -84,31 +82,31 @@ public class UserRepository {
         });
     }
 
-    public void logout(){
+    public void logout() {
         loginResult.setValue(new LoginResult());
     }
 
-    public LiveData<ProfileModel> getProfileByUserUID(String userUID){
+    public LiveData<ProfileModel> getProfileByUserUID(String userUID) {
         return profileDao.getProfileByUserUID(userUID);
     }
 
-    public LiveData<List<ProfileModel>> getFollowerProfileByUserUID(String userUID){
+    public LiveData<List<ProfileModel>> getFollowerProfileByUserUID(String userUID) {
         return profileDao.getFollowerProfileByUserUID(userUID);
     }
 
-    public LiveData<List<ProfileModel>> getFollowingProfileByUserUID(String userUID){
+    public LiveData<List<ProfileModel>> getFollowingProfileByUserUID(String userUID) {
         return profileDao.getFollowingProfileByUserUID(userUID);
     }
 
-    public LiveData<ProfileDetailModel> getProfileDetailByUserUID(String userUID){
+    public LiveData<ProfileDetailModel> getProfileDetailByUserUID(String userUID) {
         return profileDao.getProfileDetailByUserUID(userUID);
     }
 
-    public LiveData<List<ProfileModel>> searchProfileByNickname(String string){
+    public LiveData<List<ProfileModel>> searchProfileByNickname(String string) {
         return profileDao.searchProfileByNickname(string);
     }
 
-    public LiveData<Boolean> follow(Follow follow){
+    public LiveData<Boolean> follow(Follow follow) {
         MutableLiveData<Boolean> b = new MutableLiveData<>();
         service.execute(new Runnable() {
             @Override
@@ -120,7 +118,7 @@ public class UserRepository {
         return b;
     }
 
-    public LiveData<Boolean> unfollow(Follow follow){
+    public LiveData<Boolean> unfollow(Follow follow) {
         MutableLiveData<Boolean> b = new MutableLiveData<>();
         service.execute(new Runnable() {
             @Override

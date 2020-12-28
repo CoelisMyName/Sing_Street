@@ -23,19 +23,19 @@ public class PostViewModel extends AndroidViewModel {
         postRepository = new PostRepository(application);
     }
 
-    LiveData<SingCardModel> getSingCardByPostUID(String postUID){
+    LiveData<SingCardModel> getSingCardByPostUID(String postUID) {
         return postRepository.getSingCardByPostUID(postUID);
     }
 
-    public LiveData<List<CommentModel>> getCommentByPostUID(String postUID){
+    public LiveData<List<CommentModel>> getCommentByPostUID(String postUID) {
         return postRepository.getCommentByPostUID(postUID);
     }
 
-    public void start(String path){
+    public void start(String path) {
         player.start(path);
     }
 
-    public void stop(){
+    public void stop() {
         player.stop();
     }
 }

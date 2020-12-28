@@ -4,25 +4,21 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 
-@Entity(primaryKeys = {"userUID","followerUID"})
+@Entity(primaryKeys = {"userUID", "followerUID"})
 public class Follow {
     @NonNull
     String userUID;
     @NonNull
     String followerUID;
 
-    public Follow(){
+    public Follow() {
         userUID = "";
         followerUID = "";
     }
 
     @Ignore
-    public Follow(@NonNull String userUID, @NonNull String followerUID){
+    public Follow(@NonNull String userUID, @NonNull String followerUID) {
         this.userUID = userUID;
-        this.followerUID = followerUID;
-    }
-
-    public void setFollowerUID(@NonNull String followerUID) {
         this.followerUID = followerUID;
     }
 
@@ -31,13 +27,17 @@ public class Follow {
         return followerUID;
     }
 
-    public void setUserUID(@NonNull String userUID) {
-        this.userUID = userUID;
+    public void setFollowerUID(@NonNull String followerUID) {
+        this.followerUID = followerUID;
     }
 
     @NonNull
     public String getUserUID() {
         return userUID;
+    }
+
+    public void setUserUID(@NonNull String userUID) {
+        this.userUID = userUID;
     }
 
     @Override

@@ -7,29 +7,15 @@ public class LoginResult {
 
     Error<Integer> error;
 
-    public LoginResult(){
+    public LoginResult() {
     }
 
-    public LoginResult(Success<User> success){
+    public LoginResult(Success<User> success) {
         this.success = success;
     }
 
-    public LoginResult(Error<Integer> e){
+    public LoginResult(Error<Integer> e) {
         error = e;
-    }
-
-    public static class Success<T>{
-        public Success(T t){
-            data = t;
-        }
-        public T data;
-    }
-
-    public static class Error<T>{
-        public Error(T t){
-            message = t;
-        }
-        public T message;
     }
 
     public Error<Integer> getError() {
@@ -38,5 +24,21 @@ public class LoginResult {
 
     public Success<User> getSuccess() {
         return success;
+    }
+
+    public static class Success<T> {
+        public T data;
+
+        public Success(T t) {
+            data = t;
+        }
+    }
+
+    public static class Error<T> {
+        public T message;
+
+        public Error(T t) {
+            message = t;
+        }
     }
 }

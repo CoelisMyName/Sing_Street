@@ -12,14 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alina.singstreet.R;
 import com.alina.singstreet.databinding.CommentcardBinding;
-import com.alina.singstreet.databinding.SingcardBinding;
 import com.alina.singstreet.model.CommentModel;
-import com.alina.singstreet.model.SingCardModel;
 
 public class CommentCardAdapter extends ListAdapter<CommentModel, CommentCardAdapter.CommentViewHolder> {
     CommentCardListener listener;
 
-    public CommentCardAdapter(){
+    public CommentCardAdapter() {
         super(new DiffCallback());
     }
 
@@ -30,7 +28,7 @@ public class CommentCardAdapter extends ListAdapter<CommentModel, CommentCardAda
     @NonNull
     @Override
     public CommentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        CommentcardBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.commentcard,parent,false);
+        CommentcardBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.commentcard, parent, false);
         return new CommentViewHolder(binding);
     }
 
@@ -47,31 +45,6 @@ public class CommentCardAdapter extends ListAdapter<CommentModel, CommentCardAda
         void clickIcon(String userUID);
     }
 
-    class CommentViewHolder extends RecyclerView.ViewHolder {
-        CommentcardBinding binding;
-
-        public CommentViewHolder(@NonNull CommentcardBinding binding) {
-            super(binding.getRoot());
-            binding.icon.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(listener != null){
-                        listener.clickIcon(getItem(getAdapterPosition()).userUID);
-                    }
-                }
-            });
-            this.binding = binding;
-        }
-
-        public void bind(CommentModel commentModel){
-            binding.icon.setImageResource(commentModel.icon);
-            binding.comment.setText(commentModel.comment);
-            binding.nickname.setText(commentModel.nickname);
-            binding.rate.setRating(commentModel.rate);
-            binding.timestamp.setText(commentModel.timestamp);
-        }
-    }
-
     static class DiffCallback extends DiffUtil.ItemCallback<CommentModel> {
 
         @Override
@@ -82,6 +55,31 @@ public class CommentCardAdapter extends ListAdapter<CommentModel, CommentCardAda
         @Override
         public boolean areContentsTheSame(@NonNull CommentModel oldItem, @NonNull CommentModel newItem) {
             return oldItem.equals(newItem);
+        }
+    }
+
+    class CommentViewHolder extends RecyclerView.ViewHolder {
+        CommentcardBinding binding;
+
+        public CommentViewHolder(@NonNull CommentcardBinding binding) {
+            super(binding.getRoot());
+            binding.icon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        listener.clickIcon(getItem(getAdapterPosition()).userUID);
+                    }
+                }
+            });
+            this.binding = binding;
+        }
+
+        public void bind(CommentModel commentModel) {
+            binding.icon.setImageResource(commentModel.icon);
+            binding.comment.setText(commentModel.comment);
+            binding.nickname.setText(commentModel.nickname);
+            binding.rate.setRating(commentModel.rate);
+            binding.timestamp.setText(commentModel.timestamp);
         }
     }
 }

@@ -1,8 +1,8 @@
 package com.alina.singstreet.model;
 
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.DiffUtil;
 import androidx.room.DatabaseView;
+
 /*
 @DatabaseView(value = "SELECT Post.song AS song, Post.path AS path, Post.timestamp AS timestamp" +
         ", Post.description AS description, User.nickname AS nickname, User.icon AS icon" +
@@ -29,13 +29,12 @@ public class SingCardModel {
 
     @Override
     public boolean equals(@Nullable Object obj) {
-        if (obj instanceof SingCardModel){
+        if (obj instanceof SingCardModel) {
             SingCardModel temp = (SingCardModel) obj;
             return postUID.equals(temp.postUID) && userUID.equals(temp.userUID) && icon == temp.icon && nickname.equals(temp.nickname)
                     && song.equals(temp.song) && timestamp.equals(temp.timestamp) && description.equals(temp.description)
                     && path.equals(temp.path) && title.equals(temp.title) && rate == temp.rate;
-        }
-        else {
+        } else {
             return super.equals(obj);
         }
     }

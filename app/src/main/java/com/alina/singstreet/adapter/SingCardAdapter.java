@@ -17,14 +17,14 @@ import com.alina.singstreet.model.SingCardModel;
 public class SingCardAdapter extends ListAdapter<SingCardModel, SingCardAdapter.SingViewHolder> {
     SingCardListener listener;
 
-    public SingCardAdapter(){
+    public SingCardAdapter() {
         super(new DiffCallback());
     }
 
     @NonNull
     @Override
     public SingViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        SingcardBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.singcard,parent,false);
+        SingcardBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.singcard, parent, false);
         return new SingViewHolder(binding);
     }
 
@@ -34,37 +34,14 @@ public class SingCardAdapter extends ListAdapter<SingCardModel, SingCardAdapter.
         holder.bind(item);
     }
 
-    class SingViewHolder extends RecyclerView.ViewHolder{
-        SingcardBinding binding;
+    public void setListener(SingCardListener listener) {
+        this.listener = listener;
+    }
 
-        public SingViewHolder(@NonNull SingcardBinding binding) {
-            super(binding.getRoot());
-            binding.getRoot().setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(listener != null){
-                        listener.clickSingCard(getItem(getAdapterPosition()).postUID);
-                    }
-                }
-            });
-            binding.icon.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(listener != null) {
-                        listener.clickIcon(getItem(getAdapterPosition()).userUID);
-                    }
-                }
-            });
-            this.binding = binding;
-        }
+    public interface SingCardListener {
+        void clickIcon(String userUID);
 
-        public void bind(SingCardModel item) {
-            binding.icon.setImageResource(item.icon);
-            binding.timestamp.setText(item.timestamp);
-            binding.rate.setRating(item.rate);
-            binding.nickname.setText(item.nickname);
-            binding.description.setText(item.description);
-        }
+        void clickSingCard(String postUID);
     }
 
     static class DiffCallback extends DiffUtil.ItemCallback<SingCardModel> {
@@ -80,13 +57,36 @@ public class SingCardAdapter extends ListAdapter<SingCardModel, SingCardAdapter.
         }
     }
 
-    public void setListener(SingCardListener listener) {
-        this.listener = listener;
-    }
+    class SingViewHolder extends RecyclerView.ViewHolder {
+        SingcardBinding binding;
 
-    public interface SingCardListener{
-        void clickIcon(String userUID);
+        public SingViewHolder(@NonNull SingcardBinding binding) {
+            super(binding.getRoot());
+            binding.getRoot().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        listener.clickSingCard(getItem(getAdapterPosition()).postUID);
+                    }
+                }
+            });
+            binding.icon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        listener.clickIcon(getItem(getAdapterPosition()).userUID);
+                    }
+                }
+            });
+            this.binding = binding;
+        }
 
-        void clickSingCard(String postUID);
+        public void bind(SingCardModel item) {
+            binding.icon.setImageResource(item.icon);
+            binding.timestamp.setText(item.timestamp);
+            binding.rate.setRating(item.rate);
+            binding.nickname.setText(item.nickname);
+            binding.description.setText(item.description);
+        }
     }
 }

@@ -18,19 +18,19 @@ public class ProfileViewModel extends AndroidViewModel {
         userRepository = new UserRepository(application);
     }
 
-    public LiveData<Integer> isFollowed(String userUID, String targetUID){
+    public LiveData<Integer> isFollowed(String userUID, String targetUID) {
         return userRepository.isFollowed(userUID, targetUID);
     }
 
-    public LiveData<ProfileDetailModel> getProfileDetailByUserUID(String userUID){
+    public LiveData<ProfileDetailModel> getProfileDetailByUserUID(String userUID) {
         return userRepository.getProfileDetailByUserUID(userUID);
     }
 
-    public void unfollow(Follow follow){
+    public void unfollow(Follow follow) {
         userRepository.unfollow(follow);
     }
 
-    public void follow(Follow follow){
+    public void follow(Follow follow) {
         userRepository.follow(follow);
     }
 }

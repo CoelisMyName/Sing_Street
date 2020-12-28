@@ -19,7 +19,7 @@ public class HomeViewModel extends AndroidViewModel {
         postRepository = new PostRepository(application);
     }
 
-    public LiveData<List<SingCardModel>> getSingCardByUserUID(@NonNull String userUID){
+    public LiveData<List<SingCardModel>> getSingCardByUserUID(@NonNull String userUID) {
         return postRepository.getSingCardByUserUID(userUID);
     }
 }

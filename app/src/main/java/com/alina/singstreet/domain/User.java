@@ -4,16 +4,28 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
-import androidx.room.*;
+import androidx.room.Entity;
+import androidx.room.Index;
+import androidx.room.PrimaryKey;
 
 import java.util.UUID;
 
-@Entity(indices = {@Index(value = {"phoneNumber"},unique = true)} )
+@Entity(indices = {@Index(value = {"phoneNumber"}, unique = true)})
 public class User implements Parcelable {
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
     @NonNull
     @PrimaryKey
     String userUID;
-
     int icon;
     String phoneNumber;
     String nickname;
@@ -30,18 +42,6 @@ public class User implements Parcelable {
         nickname = in.readString();
         password = in.readString();
     }
-
-    public static final Creator<User> CREATOR = new Creator<User>() {
-        @Override
-        public User createFromParcel(Parcel in) {
-            return new User(in);
-        }
-
-        @Override
-        public User[] newArray(int size) {
-            return new User[size];
-        }
-    };
 
     @NonNull
     public String getUserUID() {

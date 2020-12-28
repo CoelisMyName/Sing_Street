@@ -55,7 +55,7 @@ public class HomeFragment extends Fragment {
                 if (item.getItemId() == R.id.logout) {
                     shareViewModel.logout();
                 }
-                if(item.getItemId() == R.id.profile){
+                if (item.getItemId() == R.id.profile) {
                     Navigation.findNavController(binding.getRoot()).navigate(HomeFragmentDirections.Profile(shareViewModel.getUser().getUserUID()));
                 }
                 //if(item.getItemId())
@@ -63,9 +63,8 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        headerBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.header, binding.navView,false);
+        headerBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.header, binding.navView, false);
         binding.navView.addHeaderView(headerBinding.getRoot());
-
 
 
         shareViewModel = new ViewModelProvider(requireActivity()).get(ShareViewModel.class);
@@ -118,9 +117,9 @@ public class HomeFragment extends Fragment {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if(requestCode == PERMISSIONS){
-            for (int i : grantResults){
-                if(i != PackageManager.PERMISSION_GRANTED){
+        if (requestCode == PERMISSIONS) {
+            for (int i : grantResults) {
+                if (i != PackageManager.PERMISSION_GRANTED) {
                     shareViewModel.showToast("你拒绝提供权限");
                     return;
                 }
@@ -129,7 +128,7 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    public void startSing(){
+    public void startSing() {
         Vector<String> vector = new Vector<>();
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {

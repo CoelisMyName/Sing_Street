@@ -9,8 +9,8 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.alina.singstreet.domain.Post;
 import com.alina.singstreet.repository.PostRepository;
-import com.alina.singstreet.util.Utils;
 import com.alina.singstreet.util.Recorder;
+import com.alina.singstreet.util.Utils;
 
 import java.io.IOException;
 
@@ -30,46 +30,45 @@ public class SingViewModel extends AndroidViewModel {
     public void start() {
         try {
             post.setTimestamp(Utils.getTimestamp());
-            post.setPath(Utils.getAbsolutePath(getApplication(),post.getTimestamp()));
+            post.setPath(Utils.getAbsolutePath(getApplication(), post.getTimestamp()));
             recorder.start(post.getPath());
         } catch (IOException e) {
             recording.setValue(-1);
             post.setTimestamp(null);
             post.setPath(null);
             return;
-        }
-        finally {
+        } finally {
             postLiveData.setValue(post);
         }
         recording.setValue(1);
     }
 
-    public void setUserUID(String userUID){
+    public void setUserUID(String userUID) {
         post.setUserUID(userUID);
         postLiveData.setValue(post);
     }
 
-    public void setSong(String string){
+    public void setSong(String string) {
         post.setSong(string);
         postLiveData.setValue(post);
     }
 
-    public void setTitle(String string){
+    public void setTitle(String string) {
         post.setTitle(string);
         postLiveData.setValue(post);
     }
 
-    public void setDescription(String string){
+    public void setDescription(String string) {
         post.setDescription(string);
         postLiveData.setValue(post);
     }
 
-    public void stop(){
+    public void stop() {
         recorder.stop();
         recording.setValue(0);
     }
 
-    public LiveData<Boolean> post(){
+    public LiveData<Boolean> post() {
         return postRepository.post(post);
     }
 

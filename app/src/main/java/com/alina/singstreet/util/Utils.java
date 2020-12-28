@@ -19,7 +19,7 @@ public interface Utils {
         return file.toURI();
     }
 
-    static String getTimestamp(){
+    static String getTimestamp() {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return df.format(new Date());
     }
