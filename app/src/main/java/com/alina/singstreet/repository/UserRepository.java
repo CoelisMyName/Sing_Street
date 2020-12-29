@@ -102,8 +102,8 @@ public class UserRepository {
         return profileDao.getProfileDetailByUserUID(userUID);
     }
 
-    public LiveData<List<ProfileModel>> searchProfileByNickname(String string) {
-        return profileDao.searchProfileByNickname(string);
+    public LiveData<List<ProfileModel>> searchProfileByString(String string) {
+        return profileDao.searchProfileByString(string);
     }
 
     public LiveData<Boolean> follow(Follow follow) {

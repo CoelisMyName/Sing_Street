@@ -22,6 +22,7 @@ import com.alina.singstreet.databinding.FragmentPostBinding;
 import com.alina.singstreet.model.CommentModel;
 import com.alina.singstreet.model.SingCardModel;
 
+import java.io.IOException;
 import java.util.List;
 
 public class PostFragment extends Fragment {
@@ -44,6 +45,7 @@ public class PostFragment extends Fragment {
             }
         });
 
+        assert getArguments() != null;
         String postUID = PostFragmentArgs.fromBundle(getArguments()).getPostPostUID();
         postViewModel.getSingCardByPostUID(postUID).observe(getViewLifecycleOwner(), new Observer<SingCardModel>() {
             @Override
@@ -57,7 +59,11 @@ public class PostFragment extends Fragment {
                 binding.play.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        postViewModel.start(singCardModel.path);
+                        try {
+                            postViewModel.start(singCardModel.path);
+                        } catch (IOException e) {
+                            shareViewModel.showToast("播放失败");
+                        }
                     }
                 });
             }
@@ -71,7 +77,7 @@ public class PostFragment extends Fragment {
         adapter.setListener(new CommentCardAdapter.CommentCardListener() {
             @Override
             public void clickIcon(String userUID) {
-
+                Navigation.findNavController(binding.getRoot()).navigate(PostFragmentDirections.Profile(userUID));
             }
         });
 
@@ -83,7 +89,54 @@ public class PostFragment extends Fragment {
             }
         });
 
+        binding.send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String s = binding.comment.getText().toString().trim();
+                float r = binding.rating.getRating();
+                if (s.length() <= 0) {
+                    binding.comment.setError("输入框为空");
+                    return;
+                }
+                if (r <= 0) {
+                    shareViewModel.showToast("评级为空");
+                    return;
+                }
+                postViewModel.comment(s, r).observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+                    @Override
+                    public void onChanged(Boolean aBoolean) {
+                        if (aBoolean) {
+                            shareViewModel.showToast("评论成功");
+                            binding.comment.setText("");
+                            binding.rating.setRating(0);
+                        } else {
+                            shareViewModel.showToast("评论失败");
+                        }
+                        postViewModel.refreshCommentUID();
+                    }
+                });
+            }
+        });
+
+        postViewModel.getDuration().observe(getViewLifecycleOwner(), new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                binding.progressBar.setMax(integer);
+            }
+        });
+        postViewModel.getPosition().observe(getViewLifecycleOwner(), new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                binding.progressBar.setProgress(integer);
+            }
+        });
 
         return binding.getRoot();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        postViewModel.stop();
     }
 }

@@ -120,12 +120,40 @@
     <fragment
         android:id="@+id/searchUser"
         android:name="com.alina.singstreet.view.search.SearchUserFragment"
-        android:label="search User" />
+        android:label="search User"
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/_profile"
+            app:destination="@id/profile">
+            <argument
+                android:name="User.userUID"
+                app:argType="string"
+                app:nullable="false" />
+        </action>
+    </fragment>
 
     <fragment
         android:id="@+id/searchPost"
         android:name="com.alina.singstreet.view.search.SearchPostFragment"
-        android:label="search Post" />
+        android:label="search Post"
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/_post"
+            app:destination="@id/post">
+            <argument
+                android:name="Post.postUID"
+                app:argType="string"
+                app:nullable="false" />
+        </action>
+        <action
+            android:id="@+id/_profile"
+            app:destination="@id/profile">
+            <argument
+                android:name="User.userUID"
+                app:argType="string"
+                app:nullable="false" />
+        </action>
+    </fragment>
 
     <fragment
         android:id="@+id/sing"

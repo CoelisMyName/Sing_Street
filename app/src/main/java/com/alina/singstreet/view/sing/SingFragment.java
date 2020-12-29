@@ -50,9 +50,9 @@ public class SingFragment extends Fragment {
             public void onChanged(Post post) {
                 if (post.getTitle() != null && post.getDescription() != null && post.getPath() != null
                         && post.getTimestamp() != null && post.getSong() != null && post.getUserUID() != null) {
-                    binding.appbar.toolbar.getMenu().getItem(0).setVisible(true);
+                    binding.appbar.toolbar.getMenu().findItem(R.id.check).setVisible(true);
                 } else {
-                    binding.appbar.toolbar.getMenu().getItem(0).setVisible(false);
+                    binding.appbar.toolbar.getMenu().findItem(R.id.check).setVisible(false);
                 }
             }
         });
