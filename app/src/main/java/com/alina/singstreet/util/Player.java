@@ -90,16 +90,16 @@ public class Player implements MediaPlayer.OnPreparedListener {
         startTimerTask();
     }
 
-    void cancelTimerTask(){
-        if(timer != null){
+    void cancelTimerTask() {
+        if (timer != null) {
             timer.cancel();
             timer = null;
             timerTask = null;
         }
     }
 
-    void startTimerTask(){
-        if(timer != null){
+    void startTimerTask() {
+        if (timer != null) {
             timer.cancel();
             timer = null;
             timerTask = null;
@@ -114,7 +114,7 @@ public class Player implements MediaPlayer.OnPreparedListener {
         timer.schedule(timerTask, 0, 250);
     }
 
-    void resetLiveData(){
+    void resetLiveData() {
         position.setValue(0);
         duration.setValue(0);
         playing.setValue(false);
