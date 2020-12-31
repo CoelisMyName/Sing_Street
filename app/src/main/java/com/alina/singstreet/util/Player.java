@@ -52,7 +52,7 @@ public class Player implements MediaPlayer.OnPreparedListener {
             player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mp) {
-                    //stop();
+                    stop();
                 }
             });
         }
@@ -73,24 +73,37 @@ public class Player implements MediaPlayer.OnPreparedListener {
     }
 
     public void stop() {
+        cancelTimerTask();
         if (player != null) {
-            timer.cancel();
-            timer = null;
-            timerTask = null;
             player.pause();
             player.release();
             player = null;
-            position.setValue(0);
-            duration.setValue(0);
-            playing.setValue(false);
         }
+        resetLiveData();
     }
 
     @Override
     public void onPrepared(MediaPlayer mp) {
         mp.start();
         playing.postValue(true);
-        duration.postValue(getCurrentDuration());
+        duration.postValue(mp.getDuration());
+        startTimerTask();
+    }
+
+    void cancelTimerTask(){
+        if(timer != null){
+            timer.cancel();
+            timer = null;
+            timerTask = null;
+        }
+    }
+
+    void startTimerTask(){
+        if(timer != null){
+            timer.cancel();
+            timer = null;
+            timerTask = null;
+        }
         timer = new Timer();
         timerTask = new TimerTask() {
             @Override
@@ -99,5 +112,11 @@ public class Player implements MediaPlayer.OnPreparedListener {
             }
         };
         timer.schedule(timerTask, 0, 250);
+    }
+
+    void resetLiveData(){
+        position.setValue(0);
+        duration.setValue(0);
+        playing.setValue(false);
     }
 }
