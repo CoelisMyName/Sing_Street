@@ -77,6 +77,12 @@ public class ProfileFragment extends Fragment {
 
         if (userUID.equals(shareViewModel.getUser().getUserUID())) {
             binding.button.setText("修改个人资料");
+            binding.button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Navigation.findNavController(binding.getRoot()).navigate(R.id.profileSetting);
+                }
+            });
             //TODO setting fragment
         } else {
             profileViewModel.isFollowed(shareViewModel.getUser().getUserUID(), userUID).observe(getViewLifecycleOwner(), new Observer<Integer>() {

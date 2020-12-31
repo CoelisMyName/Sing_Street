@@ -189,4 +189,9 @@
         </action>
     </fragment>
 
+    <fragment
+        android:id="@+id/profileSetting"
+        android:name="com.alina.singstreet.view.profile.ProfileSettingFragment"
+        tools:layout="@layout/fragment_profilesetting" />
+
 </navigation>

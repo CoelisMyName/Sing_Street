@@ -66,7 +66,8 @@ public class HomeFragment extends Fragment {
                     Navigation.findNavController(binding.getRoot()).navigate(R.id.searchPost);
                 }
                 //if(item.getItemId())
-                return false;
+                binding.drawer.closeDrawers();
+                return true;
             }
         });
 
