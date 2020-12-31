@@ -36,7 +36,7 @@ public class SearchPostFragment extends Fragment {
         searchViewModel = new ViewModelProvider(this).get(SearchViewModel.class);
         shareViewModel = new ViewModelProvider(requireActivity()).get(ShareViewModel.class);
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false);
-        binding.appbar.toolbar.setTitle("搜索已关注用户动态");
+        binding.appbar.toolbar.setTitle("搜索动态");
         binding.appbar.toolbar.setNavigationIcon(R.drawable.ic_round_clear_24);
         binding.appbar.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,7 +79,7 @@ public class SearchPostFragment extends Fragment {
         searchViewModel.getQuery().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
-                LiveData<List<SingCardModel>> liveData = searchViewModel.searchSingCard(shareViewModel.getUser().getUserUID(), s);
+                LiveData<List<SingCardModel>> liveData = searchViewModel.searchSingCard(s);
                 liveData.observe(getViewLifecycleOwner(), new Observer<List<SingCardModel>>() {
                     @Override
                     public void onChanged(List<SingCardModel> singCardModels) {

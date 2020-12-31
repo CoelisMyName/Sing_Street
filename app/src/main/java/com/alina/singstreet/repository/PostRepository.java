@@ -34,8 +34,8 @@ public class PostRepository {
         return postDao.getSingCardByUserUID(userUID);
     }
 
-    public LiveData<List<SingCardModel>> searchSingCard(String userUID, String string) {
-        return postDao.searchSingCard(userUID, string);
+    public LiveData<List<SingCardModel>> searchSingCard(String string) {
+        return postDao.searchSingCard(string);
     }
 
     public LiveData<List<CommentModel>> getCommentByPostUID(String postUID) {

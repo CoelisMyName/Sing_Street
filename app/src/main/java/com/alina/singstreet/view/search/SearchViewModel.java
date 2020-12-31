@@ -29,8 +29,8 @@ public class SearchViewModel extends AndroidViewModel {
         return userRepository.searchProfileByString(string);
     }
 
-    public LiveData<List<SingCardModel>> searchSingCard(String userUID, String string) {
-        return postRepository.searchSingCard(userUID, string);
+    public LiveData<List<SingCardModel>> searchSingCard(String string) {
+        return postRepository.searchSingCard(string);
     }
 
     public LiveData<String> getQuery() {
