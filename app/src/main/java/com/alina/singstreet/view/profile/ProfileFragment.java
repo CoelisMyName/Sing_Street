@@ -59,6 +59,7 @@ public class ProfileFragment extends Fragment {
 
         shareViewModel = new ViewModelProvider(requireActivity()).get(ShareViewModel.class);
         profileViewModel = new ViewModelProvider(requireActivity()).get(ProfileViewModel.class);
+        assert getArguments() != null;
         String userUID = ProfileFragmentArgs.fromBundle(getArguments()).getUserUserUID();
         profileViewModel.getProfileDetailByUserUID(userUID).observe(getViewLifecycleOwner(), new Observer<ProfileDetailModel>() {
             @Override
@@ -101,6 +102,19 @@ public class ProfileFragment extends Fragment {
             });
         }
 
-        return super.onCreateView(inflater, container, savedInstanceState);
+        binding.following.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(binding.getRoot()).navigate(ProfileFragmentDirections.Follow("正在关注", userUID, getResources().getInteger(R.integer.following)));
+            }
+        });
+        binding.follower.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(binding.getRoot()).navigate(ProfileFragmentDirections.Follow("关注者", userUID, getResources().getInteger(R.integer.follower)));
+            }
+        });
+
+        return binding.getRoot();
     }
 }

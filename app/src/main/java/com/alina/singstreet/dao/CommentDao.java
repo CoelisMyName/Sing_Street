@@ -18,4 +18,13 @@ public interface CommentDao {
 
     @Query("SELECT * FROM CommentModel WHERE postUID LIKE :postUID")
     LiveData<List<CommentModel>> getCommentByPostUID(String postUID);
+
+    @Query("SELECT * FROM CommentModel WHERE postUID LIKE :postUID")
+    List<CommentModel> getCommentsTest(String postUID);
+
+    @Query("SELECT * FROM Comment")
+    List<Comment> getCommentTest();
+
+    @Query("SELECT * FROM CommentModel")
+    List<CommentModel> getCommentModelTest();
 }

@@ -15,8 +15,14 @@ public interface PostDao {
     @Insert
     long[] insert(Post... posts);
 
+    @Query("SELECT * FROM Post")
+    List<Post> getPostsTest();
+
+    @Query("SELECT * FROM SingCardModel")
+    List<SingCardModel> getSingCardsTest();
+
     @Query(
-            "SELECT postUID, SingCardModel.userUID AS userUID, icon, nickname, song, timestamp, description, path, rate, title " +
+            "SELECT DISTINCT postUID, SingCardModel.userUID AS userUID, icon, nickname, song, timestamp, description, path, rate, title " +
                     "FROM SingCardModel, Follow " +
                     "WHERE (:userUID LIKE Follow.followerUID AND Follow.userUID = SingCardModel.userUID) OR SingCardModel.userUID LIKE :userUID"
     )

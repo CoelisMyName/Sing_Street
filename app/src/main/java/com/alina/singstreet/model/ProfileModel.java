@@ -5,8 +5,7 @@ import androidx.room.DatabaseView;
 
 @DatabaseView(
         value = "SELECT User.userUID AS userUID, icon, phoneNumber, nickname, count(DISTINCT F1.followerUID) AS follower, count(DISTINCT F2.userUID) AS following " +
-                "FROM User, Follow AS F1, Follow AS F2 " +
-                "WHERE User.userUID = F1.userUID AND User.userUID = F2.followerUID"
+                "FROM (User LEFT JOIN Follow AS F1 ON User.userUID = F1.userUID) LEFT JOIN Follow AS F2 ON User.userUID = F2.followerUID GROUP BY User.userUID"
 )
 public class ProfileModel {
     public String userUID;

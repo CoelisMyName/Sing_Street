@@ -27,23 +27,37 @@ import com.alina.singstreet.model.SingCardModel;
         exportSchema = false
 )
 public abstract class Database extends RoomDatabase {
-    static Database dataBase;
+    static Database database;
 
     static RoomDatabase.Callback callback = new RoomDatabase.Callback() {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
+            /*DataFactory dataFactory = DataFactory.getInstance();
+            UserDao userDao = database.getUserDao();
+            PostDao postDao = database.getPostDao();
+            FollowDao followDao = database.getFollowDao();
+            CommentDao commentDao = database.getCommentDao();
+            new Thread(){
+                @Override
+                public void run() {
+                    userDao.insert(dataFactory.getUsers());
+                    postDao.insert(dataFactory.getPosts());
+                    followDao.insert(dataFactory.getFollows());
+                    commentDao.insert(dataFactory.getComments());
+                }
+            }.start();*/
         }
     };
 
     public static synchronized Database getInstance(Context context) {
-        if (dataBase == null) {
+        if (database == null) {
             RoomDatabase.Builder builder = Room.databaseBuilder(context.getApplicationContext(), Database.class, "sing_street.db");
             builder.addCallback(callback);
-            dataBase = (Database) builder.build();
-            dataBase.getOpenHelper().getWritableDatabase();
+            database = (Database) builder.build();
+            database.getOpenHelper().getWritableDatabase();
         }
-        return dataBase;
+        return database;
     }
 
     public abstract UserDao getUserDao();

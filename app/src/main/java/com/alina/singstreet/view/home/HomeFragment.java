@@ -40,6 +40,7 @@ public class HomeFragment extends Fragment {
     ShareViewModel shareViewModel;
     HomeViewModel homeViewModel;
     ActionBarDrawerToggle drawerToggle;
+    SingCardAdapter adapter;
 
     @Nullable
     @Override
@@ -58,6 +59,12 @@ public class HomeFragment extends Fragment {
                 if (item.getItemId() == R.id.profile) {
                     Navigation.findNavController(binding.getRoot()).navigate(HomeFragmentDirections.Profile(shareViewModel.getUser().getUserUID()));
                 }
+                if (item.getItemId() == R.id.searchUser) {
+                    Navigation.findNavController(binding.getRoot()).navigate(R.id.searchUser);
+                }
+                if (item.getItemId() == R.id.searchPost) {
+                    Navigation.findNavController(binding.getRoot()).navigate(R.id.searchPost);
+                }
                 //if(item.getItemId())
                 return false;
             }
@@ -68,18 +75,8 @@ public class HomeFragment extends Fragment {
 
 
         shareViewModel = new ViewModelProvider(requireActivity()).get(ShareViewModel.class);
-        shareViewModel.getProfileByUserUID(shareViewModel.getUser().getUserUID()).observe(getViewLifecycleOwner(), new Observer<ProfileModel>() {
-            @Override
-            public void onChanged(ProfileModel profileModel) {
-                headerBinding.follower.setText(getString(R.string.number_of_follower, profileModel.follower));
-                headerBinding.following.setText(getString(R.string.number_of_following, profileModel.following));
-                headerBinding.icon.setImageResource(profileModel.icon);
-                headerBinding.nickname.setText(profileModel.nickname);
-                headerBinding.phoneNumber.setText(profileModel.phoneNumber);
-            }
-        });
 
-        SingCardAdapter adapter = new SingCardAdapter();
+        adapter = new SingCardAdapter();
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(requireContext());
         binding.recycler.setHasFixedSize(true);
         binding.recycler.setLayoutManager(layoutManager);
@@ -98,15 +95,40 @@ public class HomeFragment extends Fragment {
         });
 
         homeViewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
-        homeViewModel.getSingCardByUserUID(shareViewModel.getUser().getUserUID()).observe(getViewLifecycleOwner(), new Observer<List<SingCardModel>>() {
+
+        binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onChanged(List<SingCardModel> singCardModels) {
-                adapter.submitList(singCardModels);
-                adapter.notifyDataSetChanged();
+            public void onClick(View v) {
+                startSing();
             }
         });
-
         return binding.getRoot();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (shareViewModel.getUser() != null) {
+            shareViewModel.getProfileByUserUID(shareViewModel.getUser().getUserUID()).observe(getViewLifecycleOwner(), new Observer<ProfileModel>() {
+                @Override
+                public void onChanged(ProfileModel profileModel) {
+                    if (profileModel != null) {
+                        headerBinding.follower.setText(getString(R.string.number_of_follower, profileModel.follower));
+                        headerBinding.following.setText(getString(R.string.number_of_following, profileModel.following));
+                        headerBinding.icon.setImageResource(profileModel.icon);
+                        headerBinding.nickname.setText(profileModel.nickname);
+                        headerBinding.phoneNumber.setText(profileModel.phoneNumber);
+                    }
+                }
+            });
+            homeViewModel.getSingCardByUserUID(shareViewModel.getUser().getUserUID()).observe(getViewLifecycleOwner(), new Observer<List<SingCardModel>>() {
+                @Override
+                public void onChanged(List<SingCardModel> singCardModels) {
+                    adapter.submitList(singCardModels);
+                    adapter.notifyDataSetChanged();
+                }
+            });
+        }
     }
 
     @Override

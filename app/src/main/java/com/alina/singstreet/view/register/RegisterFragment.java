@@ -20,6 +20,8 @@ import com.alina.singstreet.ShareViewModel;
 import com.alina.singstreet.databinding.FragmentRegisterBinding;
 import com.alina.singstreet.domain.User;
 
+import java.util.Random;
+
 public class RegisterFragment extends Fragment implements View.OnClickListener {
     FragmentRegisterBinding binding;
     TextState textState = new TextState();
@@ -136,7 +138,9 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                 User user = new User();
                 user.setPassword(binding.password.getText().toString());
                 user.setNickname(binding.nickname.getText().toString());
-                user.setIcon(R.drawable.icon1);
+                int[] icons = {R.drawable.icon1, R.drawable.icon2, R.drawable.icon3, R.drawable.icon4, R.drawable.icon5, R.drawable.icon6, R.drawable.icon7};
+                Random random = new Random();
+                user.setIcon(icons[random.nextInt(icons.length) % icons.length]);
                 user.setPhoneNumber(binding.phoneNumber.getText().toString());
                 shareViewModel.register(user).observe(this, new Observer<Boolean>() {
                     @Override

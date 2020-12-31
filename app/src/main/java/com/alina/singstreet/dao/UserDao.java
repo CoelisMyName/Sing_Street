@@ -7,11 +7,16 @@ import androidx.room.Update;
 
 import com.alina.singstreet.domain.User;
 
+import java.util.List;
+
 @Dao
 public interface UserDao {
 
     @Insert
     long[] insert(User... users);
+
+    @Query("SELECT * FROM User")
+    List<User> getUsersTest();
 
     @Update
     int update(User... users);

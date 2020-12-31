@@ -23,6 +23,7 @@ public class PostViewModel extends AndroidViewModel {
     Comment comment = new Comment();
     LiveData<Integer> duration;
     LiveData<Integer> position;
+    LiveData<Boolean> playing;
 
     public PostViewModel(@NonNull Application application) {
         super(application);
@@ -30,6 +31,11 @@ public class PostViewModel extends AndroidViewModel {
         postRepository = new PostRepository(application);
         duration = player.getDuration();
         position = player.getPosition();
+        playing = player.getPlaying();
+    }
+
+    public LiveData<Boolean> getPlaying() {
+        return playing;
     }
 
     public LiveData<Integer> getDuration() {
@@ -62,14 +68,6 @@ public class PostViewModel extends AndroidViewModel {
 
     public void setPostUID(String s) {
         comment.setPostUID(s);
-    }
-
-    public void setComment(String s) {
-        comment.setComment(s);
-    }
-
-    public void setRate(float r) {
-        comment.setRate(r);
     }
 
     public LiveData<Boolean> comment(String c, float r) {

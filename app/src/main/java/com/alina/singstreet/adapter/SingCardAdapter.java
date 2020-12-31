@@ -87,6 +87,8 @@ public class SingCardAdapter extends ListAdapter<SingCardModel, SingCardAdapter.
             binding.rate.setRating(item.rate);
             binding.nickname.setText(item.nickname);
             binding.description.setText(item.description);
+            binding.title.setText(item.title);
+            binding.song.setText(item.song);
         }
     }
 }

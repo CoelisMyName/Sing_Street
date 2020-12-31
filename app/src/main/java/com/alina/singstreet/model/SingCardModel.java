@@ -12,9 +12,7 @@ import androidx.room.DatabaseView;
 @DatabaseView(value = "SELECT Post.song AS song, Post.title AS title, Post.path AS path, Post.timestamp AS timestamp, " +
         "Post.description AS description, User.nickname AS nickname, User.icon AS icon, " +
         "avg(Comment.rate) AS rate,User.userUID AS userUID, Post.postUID AS postUID " +
-        "FROM Post, User, Comment " +
-        "WHERE Post.userUID = User.userUID AND Comment.postUID = Post.postUID " +
-        "GROUP BY Comment.postUID")
+        "FROM (Post JOIN User ON Post.userUID = User.userUID) LEFT JOIN Comment ON Comment.postUID = Post.postUID GROUP BY Post.postUID")
 public class SingCardModel {
     public String postUID;
     public String userUID;

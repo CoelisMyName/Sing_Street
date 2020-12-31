@@ -19,4 +19,7 @@ public interface FollowDao {
 
     @Query("SELECT CASE WHEN :userUID IN (SELECT followerUID FROM Follow WHERE :targetUID = userUID) THEN 1 ELSE 0 END")
     LiveData<Integer> isFollowed(String userUID, String targetUID);
+
+    @Query("SELECT CASE WHEN :userUID IN (SELECT followerUID FROM Follow WHERE :targetUID = userUID) THEN 1 ELSE 0 END")
+    Integer isFollowedTest(String userUID, String targetUID);
 }

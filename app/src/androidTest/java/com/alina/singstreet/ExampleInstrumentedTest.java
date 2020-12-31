@@ -1,14 +1,16 @@
 package com.alina.singstreet;
 
-import android.content.Context;
+import android.media.AudioAttributes;
+import android.media.MediaPlayer;
 
 import androidx.test.ext.junit.runners.AndroidJUnit4;
-import androidx.test.platform.app.InstrumentationRegistry;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.junit.Assert.assertEquals;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -18,10 +20,18 @@ import static org.junit.Assert.assertEquals;
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
     @Test
-    public void useAppContext() {
-        // Context of the app under test.
-        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.alina.singstreet", appContext.getPackageName());
+    public void useAppContext() throws IOException {
+        String path = "/storage/emulated/0/Android/data/com.alina.singstreet/cache/2020-12-30 07:32:34.3gp";
+        File file = new File("/storage/emulated/0/Android/data/com.alina.singstreet/cache/2020-12-30 07:32:34.3gp");
+        FileInputStream fis = new FileInputStream(file);
+        fis.close();
+        MediaPlayer player = new MediaPlayer();
+        AudioAttributes.Builder builder = new AudioAttributes.Builder();
+        builder.setContentType(AudioAttributes.CONTENT_TYPE_MUSIC).setUsage(AudioAttributes.USAGE_MEDIA);
+        player.setAudioAttributes(builder.build());
+        player.setDataSource(path);
+        player.prepare();
+        player.start();
     }
 
 

@@ -18,7 +18,7 @@ public class ProfileCardAdapter extends ListAdapter<ProfileModel, ProfileCardAda
     ProfileCardListener listener;
 
     public ProfileCardAdapter() {
-        this(new DiffCallback());
+        super(new DiffCallback());
     }
 
     protected ProfileCardAdapter(@NonNull DiffUtil.ItemCallback<ProfileModel> diffCallback) {

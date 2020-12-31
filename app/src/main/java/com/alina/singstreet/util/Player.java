@@ -1,5 +1,6 @@
 package com.alina.singstreet.util;
 
+import android.media.AudioAttributes;
 import android.media.MediaPlayer;
 import android.util.Log;
 
@@ -10,12 +11,13 @@ import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Player {
+public class Player implements MediaPlayer.OnPreparedListener {
     Timer timer;
     TimerTask timerTask;
     MediaPlayer player;
     MutableLiveData<Integer> duration = new MutableLiveData<>();
     MutableLiveData<Integer> position = new MutableLiveData<>();
+    MutableLiveData<Boolean> playing = new MutableLiveData<>(false);
 
     public LiveData<Integer> getDuration() {
         return duration;
@@ -25,29 +27,34 @@ public class Player {
         return position;
     }
 
+    public LiveData<Boolean> getPlaying() {
+        return playing;
+    }
+
     public void start(String path) throws IOException {
         if (player == null) {
             player = new MediaPlayer();
+            AudioAttributes.Builder builder = new AudioAttributes.Builder();
+            builder.setContentType(AudioAttributes.CONTENT_TYPE_MUSIC).setUsage(AudioAttributes.USAGE_MEDIA);
+            player.setAudioAttributes(builder.build());
             try {
                 player.setDataSource(path);
-                player.prepare();
-                player.start();
+                player.setOnPreparedListener(this);
+                player.prepareAsync();
             } catch (IOException e) {
+                e.printStackTrace();
                 Log.e("Player", "prepare() failed");
                 player.release();
                 player = null;
                 throw e;
             }
 
-            duration.setValue(getCurrentDuration());
-            timer = new Timer();
-            timerTask = new TimerTask() {
+            player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
-                public void run() {
-                    position.postValue(getCurrentPosition());
+                public void onCompletion(MediaPlayer mp) {
+                    //stop();
                 }
-            };
-            timer.schedule(timerTask, 0, 250);
+            });
         }
     }
 
@@ -74,6 +81,23 @@ public class Player {
             player.release();
             player = null;
             position.setValue(0);
+            duration.setValue(0);
+            playing.setValue(false);
         }
+    }
+
+    @Override
+    public void onPrepared(MediaPlayer mp) {
+        mp.start();
+        playing.postValue(true);
+        duration.postValue(getCurrentDuration());
+        timer = new Timer();
+        timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                position.postValue(getCurrentPosition());
+            }
+        };
+        timer.schedule(timerTask, 0, 250);
     }
 }

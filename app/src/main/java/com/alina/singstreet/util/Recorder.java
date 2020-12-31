@@ -12,9 +12,9 @@ public class Recorder {
         if (recorder == null) {
             recorder = new MediaRecorder();
             recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-            recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+            recorder.setOutputFormat(MediaRecorder.OutputFormat.AAC_ADTS);
             recorder.setOutputFile(path);
-            recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+            recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
             try {
                 recorder.prepare();
                 recorder.start();
@@ -29,8 +29,12 @@ public class Recorder {
 
     public void stop() {
         if (recorder != null) {
-            recorder.stop();
-            recorder.release();
+            try {
+                recorder.stop();
+                recorder.release();
+            } catch (Exception ignored) {
+
+            }
             recorder = null;
         }
     }

@@ -10,7 +10,7 @@ import java.util.Date;
 public interface Utils {
     static String getAbsolutePath(Context context, String date) {
         String dirPath = context.getExternalCacheDir().getAbsolutePath();
-        return dirPath + "/" + date + ".3gpp";
+        return dirPath + "/" + date + ".aac";
     }
 
     static URI absolutePathToUri(String path) {
