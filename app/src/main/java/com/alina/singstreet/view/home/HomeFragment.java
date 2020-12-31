@@ -124,6 +124,7 @@ public class HomeFragment extends Fragment {
             homeViewModel.getSingCardByUserUID(shareViewModel.getUser().getUserUID()).observe(getViewLifecycleOwner(), new Observer<List<SingCardModel>>() {
                 @Override
                 public void onChanged(List<SingCardModel> singCardModels) {
+                    //Log.d("Home Fragment", "onChanged: " + singCardModels);
                     adapter.submitList(singCardModels);
                     adapter.notifyDataSetChanged();
                 }

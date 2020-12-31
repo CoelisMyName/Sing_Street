@@ -20,7 +20,7 @@ public interface Utils {
     }
 
     static String getTimestamp() {
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH_mm_ss");
         return df.format(new Date());
     }
 

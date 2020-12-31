@@ -13,6 +13,9 @@ import com.alina.singstreet.dao.ProfileDao;
 import com.alina.singstreet.dao.UserDao;
 import com.alina.singstreet.data.DataFactory;
 import com.alina.singstreet.data.Database;
+import com.alina.singstreet.domain.Comment;
+import com.alina.singstreet.domain.Post;
+import com.alina.singstreet.domain.User;
 import com.alina.singstreet.model.ProfileModel;
 
 import org.junit.After;
@@ -44,10 +47,10 @@ public class DatabaseTest {
         postDao = dataBase.getPostDao();
         dataFactory = DataFactory.getInstance();
 
-        userDao.insert(dataFactory.getUsers());
-        followDao.insert(dataFactory.getFollows());
-        postDao.insert(dataFactory.getPosts());
-        commentDao.insert(dataFactory.getComments());
+        //userDao.insert(dataFactory.getUsers());
+        //followDao.insert(dataFactory.getFollows());
+        //postDao.insert(dataFactory.getPosts());
+        //commentDao.insert(dataFactory.getComments());
     }
 
     @After
@@ -66,8 +69,30 @@ public class DatabaseTest {
 
     @Test
     public void postTest() throws Exception {
-        System.out.println(postDao.getPostsTest());
-        System.out.println(postDao.getSingCardsTest());
+        //System.out.println(postDao.getPostsTest());
+        //System.out.println(postDao.getSingCardsTest());
+        User user = new User();
+        user.setPassword("");
+        user.setIcon(1);
+        user.setPhoneNumber("1");
+        user.setNickname("ni");
+        userDao.insert(user);
+        Post post = new Post();
+        post.setDescription("d");
+        post.setSong("s");
+        post.setUserUID(user.getUserUID());
+        post.setTitle("t");
+        post.setTimestamp("time");
+        post.setPath("path");
+        postDao.insert(post);
+        Comment comment = new Comment();
+        comment.setUserUID(user.getUserUID());
+        comment.setPostUID(post.getPostUID());
+        comment.setTimestamp("time");
+        comment.setRate(100);
+        comment.setComment("no comment");
+        commentDao.insert(comment);
+        System.out.println(postDao.getSingCardByUserUIDTest(user.getUserUID()));
     }
 
     @Test
