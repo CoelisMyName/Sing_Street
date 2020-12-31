@@ -67,7 +67,7 @@ public class HomeFragment extends Fragment {
                 }
                 //if(item.getItemId())
                 binding.drawer.closeDrawers();
-                return true;
+                return false;
             }
         });
 
